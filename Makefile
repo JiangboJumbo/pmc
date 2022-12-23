@@ -48,6 +48,23 @@ libpmc.so: $(IO_SRC) $(PMC_SRC) $(BOUND_LIB_SRC) $(H_FILES) pmc_lib.cpp
 libpmc_test: libpmc.so libpmc_test.cpp
 	$(CXX) libpmc_test.cpp ./libpmc.so  -o libpmc_test
 	./libpmc_test	
-	
+
+# add an install step
+
+PREFIX = /usr/local
+
+.PHONY: install
+install: libpmc.so 
+	mkdir -p $(DESTDIR)$(PREFIX)/lib
+	mkdir -p $(DESTDIR)$(PREFIX)/include
+	cp libpmc.so $(DESTDIR)$(PREFIX)/lib/libpmc.so
+	cp pmc.h $(DESTDIR)$(PREFIX)/include
+
+.PHONY: uninstall
+uninstall: 
+	rm -f $(DESTDIR)$(PREFIX)/lib/libpmc.so
+	rm -f $(DESTDIR)$(PREFIX)/include/pmc.h
+
+.PHONY: clean
 clean:
 	rm -rf *.o pmc libpmc.so

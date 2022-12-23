@@ -20,6 +20,7 @@
 #ifndef __PMC_H__
 #define __PMC_H__
 
+
 #include "pmc_headers.h"
 #include "pmc_input.h"
 #include "pmc_utils.h"
@@ -29,4 +30,12 @@
 #include "pmcx_maxclique.h"
 #include "pmcx_maxclique_basic.h"
 
+# ifdef __cplusplus
+extern "C" {
+	int max_clique(long long nedges, int*ei, int*ej, int index_offset, int outsize, int*clique);
+}
+# endif // ifdef __cplusplus
+
 #endif
+
+

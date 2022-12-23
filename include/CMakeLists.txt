@@ -1,0 +1,22 @@
+set(
+    pmc_headers
+    "${CMAKE_CURRENT_SOURCE_DIR}/libpmc.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmc_graph.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmc_headers.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmc_heu.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmc_input.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmc_maxclique.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmc_neigh_coloring.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmc_neigh_cores.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmc_utils.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmc_vertex.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmcx_maxclique.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmcx_maxclique_basic.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/pmc.h" 
+)
+
+set(
+  pmc_headers
+  "${pmc_headers}"
+  PARENT_SCOPE
+)
