@@ -1,3 +1,38 @@
+Dev's Update
+-------------------------------------
+
+I've converted `ryanrossi/pmc` into a CMake Project that exports the library as a shared library. 
+
+This allows one to install `pmc` by doing:
+
+```
+cd pmc
+mkdir build
+cd build
+cmake ..
+make
+make install
+```
+
+This will create a shared library, e.g. `/usr/local/lib/libpmc.so`. 
+
+To use `pmc` in another project, (assuming pmc is installed), simply link the shared library. 
+
+```
+g++ test.cpp -lpmc
+```
+where in `test.cpp` you need to include `pmc` as
+```
+#include "libpmc.h"
+```
+
+Currently, only one function is exported:
+```
+   int max_clique(long long nedges, int* ei, int* ej, int offset, int output_size, int * output);
+```
+
+
+
 Parallel Maximum Clique (PMC) Library
 =====================================
 
