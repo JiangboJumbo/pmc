@@ -3,13 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-extern "C" {
-    
-// a list of edges, where index_offset is the starting index
-int max_clique(long long nedges, int *ei, int *ej, int index_offset, 
-                int outsize, int *clique);
-                
-};          
+#include "libpmc.h"
+
 
 void test1() {
     // test a triangle
