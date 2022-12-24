@@ -24,20 +24,6 @@ endif()
 # Find OMP
 # ----------------------------------------------
 
-if (APPLE)
-
-  # set(CMAKE_C_COMPILER /usr/local/opt/llvm/bin/clang)
-  # set(CMAKE_CXX_COMPILER /usr/local/opt/llvm/bin/clang++)
-  set(CMAKE_C_COMPILER /usr/local/bin/gcc-12)
-  set(CMAKE_CXX_COMPILER /usr/local/bin/g++-12)
-
-
-
-else()
-find_package(OpenMP REQUIRED)
-endif()
-
-
 
 # Set Compiler flags
 # ----------------------------------------------
@@ -64,12 +50,12 @@ set_target_properties(pmc PROPERTIES PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/i
 # 	"$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}/pmc>"
 # )
 
-if(APPLE)
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
-else()
-target_link_libraries(pmc PUBLIC OpenMP::OpenMP_CXX)
-endif()
+# if(APPLE)
+#   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
+#   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
+# else()
+# target_link_libraries(pmc PUBLIC OpenMP::OpenMP_CXX)
+# endif()
 
 # Install pmc shared library
 install(TARGETS pmc

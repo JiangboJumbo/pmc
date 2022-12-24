@@ -26,8 +26,7 @@ extern "C" {
     
 // a list of edges, where index_offset is the starting index
 int max_clique(long long nedges, int *ei, int *ej, int index_offset, 
-                int outsize, int *clique) {
-    input in;
+                int outsize, int *clique, input in) {
     
     pmc_graph G(nedges, ei, ej, index_offset); 
     

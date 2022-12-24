@@ -184,7 +184,9 @@ class input {
                 return;
             }
             cout << "workers: " << threads <<endl;
+#ifdef _OPENMP
             omp_set_num_threads(threads);
+#endif
         }
 
 };

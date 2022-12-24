@@ -30,11 +30,11 @@
 #include "pmcx_maxclique.h"
 #include "pmcx_maxclique_basic.h"
 
-# ifdef __cplusplus
-extern "C" {
-	int max_clique(long long nedges, int*ei, int*ej, int index_offset, int outsize, int*clique);
-}
-# endif // ifdef __cplusplus
+// # ifdef __cplusplus
+// extern "C" {
+// 	int max_clique(long long nedges, int*ei, int*ej, int index_offset, int outsize, int*clique);
+// }
+// # endif // ifdef __cplusplus
 
 #endif
 
