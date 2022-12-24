@@ -25,8 +25,44 @@ using namespace pmc;
 extern "C" {
     
 // a list of edges, where index_offset is the starting index
-int max_clique(long long nedges, int *ei, int *ej, int index_offset, 
-                int outsize, int *clique, input in, bool verbose) {
+int max_clique(long long nedges, int *ei, int *ej,
+                int outsize, int *clique, 
+                int index_offset,
+                bool verbose, 
+                int algorithm, 
+                int threads,
+                bool graph_stats,
+                string heuristic_strategy,
+                double time_limit_secs,
+                double remove_time_secs,
+                string edge_sorter,
+                string vertex_search_order,
+                bool decreasing_order
+                ) 
+{
+
+    input in;
+    in.algorithm = algorithm;
+    in.threads = threads > omp_get_max_threads() ? omp_get_max_threads() : threads;
+    in.graph_stats = graph_stats;
+    in.lb = 0;
+    in.ub = 0;
+    in.heu_strat = heuristic_strategy;
+    in.verbose=verbose;
+    in.time_limit = time_limit_secs;
+    in.remove_time = remove_time_secs;
+    in.edge_sorter = edge_sorter;
+    in.vertex_search_order = vertex_search_order;
+    in.decreasing_order = decreasing_order;
+
+    if (in.heu_strat == "0" && in.algorithm == -1){
+        in.algorithm = 0;
+    }
+
+    if (in.threads <= 0) in.threads = 1;
+
+
+
     
     pmc_graph G(nedges, ei, ej, index_offset); 
     
