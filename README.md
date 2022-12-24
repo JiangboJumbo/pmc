@@ -1,8 +1,8 @@
-Dev's Update
--------------------------------------
+## Dev's Update
 
 I've converted `ryanrossi/pmc` into a CMake Project that exports the library as a shared library. 
 
+### Installation
 This allows one to install `pmc` by doing:
 
 ```
@@ -14,7 +14,8 @@ make
 make install
 ```
 
-This will create a shared library, e.g. `/usr/local/lib/libpmc.so`. 
+In the `CMakeLists.txt` there is one main option: `USE_OPENMP`, which by default is `OFF` to make installations eaiser. If you would like to benefit from the library's parallel implementation, simply set it to `ON`. 
+
 
 To use `pmc` in another project, (assuming pmc is installed), simply link the shared library. 
 
@@ -25,6 +26,8 @@ where in `test.cpp` you need to include `pmc` as
 ```
 #include "libpmc.h"
 ```
+
+### Usage
 
 Currently, only one function is exported:
 ```
@@ -65,10 +68,10 @@ Parameters:
 - `string vertex_search_order` can be `{deg}` specifies the order to search for maxcliques
 - `bool decreasing_order` decides whether to reverse the order for the method in `vertex_search_order`.
 
+additional explanations of the options are available below, in Rossi's original readme. 
 
 
-Parallel Maximum Clique (PMC) Library
-=====================================
+# Parallel Maximum Clique (PMC) Library
 
 In short, a parameterized high performance library for computing maximum cliques in large sparse graphs.
 
@@ -83,8 +86,8 @@ Algorithms in the PMC library are easily adaptable for use with a variety of ord
 
 
 
-Features
---------
+## Features
+
 0.  General framework for parallel maximum clique algorithms
 1.	Optimized to be fast for large sparse graphs 
 	+ 	Algorithms tested on networks of 1.8 billion edges
@@ -97,8 +100,7 @@ Features
 	+   Lowers memory-requirements for massive graphs, increases speed, and has caching benefits
 
 
-Synopsis
----------
+## Synopsis
 
 ### Setup
 First, you'll need to compile the parallel maximum clique library.  
@@ -136,8 +138,7 @@ For details see: <http://math.nist.gov/MatrixMarket/formats.html#MMformat>
 		Codes for transforming the graph into the correct format are provided in the experiments directory.
 
 
-Overview
----------
+## Overview
 
 The parallel maximum clique algorithms use tight bounds that are fast to compute.
 A few of those are listed below.
@@ -243,8 +244,8 @@ using `-o rand` to find potentially different cliques of a certain size
 
 
 
-Terms and conditions
---------------------
+## Terms and conditions
+
 Please feel free to use these codes. We only ask that you cite:  
 
 	Ryan A. Rossi, David F. Gleich, Assefaw H. Gebremedhin, Md. Mostofa Patwary,  
