@@ -27,7 +27,6 @@ extern "C" {
 // a list of edges, where index_offset is the starting index
 int max_clique(long long nedges, int *ei, int *ej,
                 int outsize, int *clique, 
-                int index_offset,
                 bool verbose, 
                 int algorithm, 
                 int threads,
@@ -64,7 +63,7 @@ int max_clique(long long nedges, int *ei, int *ej,
 
 
     
-    pmc_graph G(nedges, ei, ej, index_offset); 
+    pmc_graph G(nedges, ei, ej, 0); 
     
     //! ensure wait time is greater than the time to recompute the graph data structures
     if (G.num_edges() > 1000000000 && in.remove_time < 120)  in.remove_time = 120;
@@ -145,16 +144,16 @@ int max_clique(long long nedges, int *ei, int *ej,
                 break;
         }
         if (verbose){
-        seconds = (get_time() - seconds);
-        cout << "Time taken: " << seconds << " SEC" << endl;
-        cout << "Size (omega): " << C.size() << endl;
-        print_max_clique(C);
+          seconds = (get_time() - seconds);
+          cout << "Time taken: " << seconds << " SEC" << endl;
+          cout << "Size (omega): " << C.size() << endl;
+          print_max_clique(C);
         }
     }
     
     // save the output
     for(int i = 0; i < C.size() && i < outsize; i++)
-        clique[i] = C[i] + index_offset;
+        clique[i] = C[i];
 
     return C.size();
     return 0;

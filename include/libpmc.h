@@ -6,7 +6,6 @@ extern "C" {
 
 int max_clique(long long nedges, int *ei, int *ej,
                 int outsize, int *clique, 
-                int index_offset=0,
                 bool verbose=true, 
                 int algorithm=0, 
                 int threads=1,

@@ -28,8 +28,42 @@ where in `test.cpp` you need to include `pmc` as
 
 Currently, only one function is exported:
 ```
-   int max_clique(long long nedges, int* ei, int* ej, int offset, int output_size, int * output);
+   int res = max_clique(long long nedges, int *ei, int *ej,
+                int outsize, int *clique,
+                bool verbose=true,
+                int algorithm=0,
+                int threads=1,
+                bool graph_stats=false,
+                string heuristic_strategy="kcore",
+                double time_limit_secs=60*60,
+                double remove_time_secs = 4.0,
+                string edge_sorter = "",
+                string vertex_search_order = "deg",
+                bool decreasing_order=false
+                );
 ```
+
+Inputs:
+- `long long nedges` is the number of edges in the graph
+- `int* ei` is a vector of the edge source (0-indexed)
+- `int* ej` is a vector of the edge destinations (Note: since the graph is undirected, only edges where `ei[k] > ej[k]` will be considered as part of the graph)
+- `int outsize` is the length of `clique` vector. A safe option is to make `outsize = maxd+1` where `maxd` is the maximum degree in the graph. 
+
+Outputs:
+- `int res` is the size of the largest clique found.
+- `int* clique` will be updated with the node indices of the elements in the largest clique. Only elements upto `min(res, outsize)` of `clique` are updated. It will not throw an error if `res > outsize`. 
+
+Parameters:
+- `bool verbose` set true for printed debug messages
+- `int algorithm` can be `{0, 1, 2}` to decide which algorithm is used (see below/Rossi's paper for details)
+- `int threads` decides how many threads to use
+- `bool graph_stats` (unknown)
+- `string heuristic_strategy` can be `{"kcore", "0"}` 
+- `double time_limit_secs` is the maximum time allowed for soling the problem
+- `double remove_time` is the maximum time before reducing the graph
+- `string edge_sorter` can be `{""}` decides the strategy for edge sorting
+- `string vertex_search_order` can be `{deg}` specifies the order to search for maxcliques
+- `bool decreasing_order` decides whether to reverse the order for the method in `vertex_search_order`.
 
 
 
