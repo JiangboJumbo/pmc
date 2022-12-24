@@ -153,7 +153,9 @@ void pmc_graph::reduce_graph(
     // compute k-cores and share bounds: ensure operation completed by single process
     #pragma omp single nowait
     {
+        #ifdef _OPENMP
         cout << ">>> [pmc: thread " << omp_get_thread_num() + 1 << "]" <<endl;
+        #endif
         G.induced_cores_ordering(vs,es,pruned);
     }
     V.clear();
@@ -162,8 +164,10 @@ void pmc_graph::reduce_graph(
 
 
 void pmc_graph::print_info(vector<int> &C_max, double &sec) {
-    cout << "*** [pmc: thread " << omp_get_thread_num() + 1;
-    cout << "]   current max clique = " << C_max.size();
+#ifdef _OPENMP
+    cout << "*** [pmc: thread " << omp_get_thread_num() + 1 << "]";
+#endif
+    cout << "   current max clique = " << C_max.size();
     cout << ",  time = " << get_time() - sec << " sec" <<endl;
 }
 
@@ -186,7 +190,9 @@ bool pmc_graph::time_left(vector<int> &C_max, double sec, double time_limit, boo
 }
 
 void pmc_graph::graph_stats(pmc_graph& G, int& mc, int id, double &sec) {
+#ifdef _OPENMP
     cout << "[pmc: bounds updated - thread " << omp_get_thread_num() + 1 << "]  ";
+#endif
     cout << "time = " << get_time() - sec << " sec, ";
     cout << "|V| = " << (G.num_vertices() - id);
     cout << " (" << id << " / " << G.num_vertices();

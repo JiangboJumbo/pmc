@@ -161,9 +161,11 @@ class input {
             }
 
             // both off, use default alg
-            if (heu_strat == "0" && algorithm == -1)
+            if (heu_strat == "0" && algorithm == -1){
                 algorithm = 0;
+            }
 
+            threads = threads > omp_get_max_threads() ? omp_get_max_threads() : threads;
             if (threads <= 0) threads = 1;
 
             if (!fexists(graph.c_str())) {
@@ -184,7 +186,9 @@ class input {
                 return;
             }
             cout << "workers: " << threads <<endl;
+#ifdef _OPENMP
             omp_set_num_threads(threads);
+#endif
         }
 
 };
