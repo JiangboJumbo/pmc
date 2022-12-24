@@ -5,8 +5,12 @@ project(pmc)
 # OPTIONS
 # ----------------------------------------------
 
-option(_OPENMP "enable openmp" OFF)
+option(ENABLE_OPENMP "enable openmp" OFF)
 
+if (ENABLE_OPENMP)
+    MESSAGE(STATUS "Building with OPENMP")
+    add_definitions(-D_OPENMP)
+endif()
 
 # Export compile commands
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
