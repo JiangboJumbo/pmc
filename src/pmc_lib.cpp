@@ -24,25 +24,6 @@ using namespace pmc;
 
 extern "C" {
 
-int test_function_1(int i){
-    return 2*i;
-}
-
-
-int test_function_2(int n, int*e, int*o){
-
-    int m = 0;
-
-    for (int i = 0 ; i < n; i++){
-        if (e[i] < 100) {
-            o[i] = 2 * e[i];
-            m = i;
-        }
-    }
-    return m;
-}
-
-
     
 // a list of edges, where index_offset is the starting index
 int max_clique(long long nedges, int *ei, int *ej,
