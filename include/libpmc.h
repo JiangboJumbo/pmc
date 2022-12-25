@@ -2,6 +2,11 @@
 extern "C" {
 #endif
 
+int test_function_1(int i);
+
+
+int test_function_2(int n, int*e, int*o);
+
 int max_clique(long long nedges, int *ei, int *ej,
                 int outsize, int *clique, 
                 int verbose,  // should be 0 by default
