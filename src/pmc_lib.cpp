@@ -27,32 +27,33 @@ extern "C" {
 // a list of edges, where index_offset is the starting index
 int max_clique(long long nedges, int *ei, int *ej,
                 int outsize, int *clique, 
-                bool verbose, 
+                int verbose, 
                 int algorithm, 
-                int threads,
-                bool graph_stats,
-                string heuristic_strategy,
+                int offset,
+                // int threads,
+                // bool graph_stats,
+                // string heuristic_strategy,
                 double time_limit_secs,
-                double remove_time_secs,
-                string edge_sorter,
-                string vertex_search_order,
-                bool decreasing_order
+                double remove_time_secs
+                // string edge_sorter,
+                // string vertex_search_order,
+                // bool decreasing_order
                 ) 
 {
 
     input in;
     in.algorithm = algorithm;
-    in.threads = threads > omp_get_max_threads() ? omp_get_max_threads() : threads;
-    in.graph_stats = graph_stats;
+    in.threads = omp_get_max_threads(); // evaluates to 1 when _OPENMP is not defined
+    in.graph_stats = false; //graph_stats;
     in.lb = 0;
     in.ub = 0;
-    in.heu_strat = heuristic_strategy;
-    in.verbose=verbose;
+    in.heu_strat = "kcore"; //heuristic_strategy;
+    in.verbose = verbose > 0;
     in.time_limit = time_limit_secs;
     in.remove_time = remove_time_secs;
-    in.edge_sorter = edge_sorter;
-    in.vertex_search_order = vertex_search_order;
-    in.decreasing_order = decreasing_order;
+    in.edge_sorter = ""; // edge_sorter;
+    in.vertex_search_order = "deg"; // vertex_search_order;
+    in.decreasing_order = false; // decreasing_order;
 
     if (in.heu_strat == "0" && in.algorithm == -1){
         in.algorithm = 0;
@@ -60,10 +61,7 @@ int max_clique(long long nedges, int *ei, int *ej,
 
     if (in.threads <= 0) in.threads = 1;
 
-
-
-    
-    pmc_graph G(nedges, ei, ej, 0); 
+    pmc_graph G(nedges, ei, ej, offset); 
     
     //! ensure wait time is greater than the time to recompute the graph data structures
     if (G.num_edges() > 1000000000 && in.remove_time < 120)  in.remove_time = 120;
@@ -153,7 +151,7 @@ int max_clique(long long nedges, int *ei, int *ej,
     
     // save the output
     for(int i = 0; i < C.size() && i < outsize; i++)
-        clique[i] = C[i];
+        clique[i] = C[i] + offset;
 
     return C.size();
     return 0;
