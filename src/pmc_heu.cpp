@@ -97,7 +97,7 @@ int pmc_heu::search_bounds(pmc_graph& G,
                             C.push_back(v);
                             C_max = C;
                             if (mc >= ub) found_ub = true;
-                            print_info(C_max);
+                            //print_info(C_max);
                         }
                     }
                 }
@@ -105,7 +105,7 @@ int pmc_heu::search_bounds(pmc_graph& G,
             C = X; P = T;
         }
     }
-    cout << "[pmc heuristic]\t mc = " << mc <<endl;
+    // cout << "[pmc heuristic]\t mc = " << mc <<endl;
     return mc;
 }
 
