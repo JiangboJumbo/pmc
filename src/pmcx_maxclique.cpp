@@ -18,6 +18,7 @@
  */
 
 #include "pmcx_maxclique.h"
+#include <omp.h>
 
 using namespace std;
 using namespace pmc;
@@ -65,6 +66,7 @@ int pmcx_maxclique::search(pmc_graph& G, vector<int>& sol) {
 
     #pragma omp parallel for schedule(dynamic) shared(pruned, G, T, V, mc, C_max, induce_time) \
         firstprivate(colors,ind,vs,es) private(u, P, C)
+    // std::cout << "Number of threads running in parallel: " << omp_get_num_threads() << "\n";
     for (i = 0; i < (V.size()) - (mc-1); ++i) {
         if (not_reached_ub) {
             if (G.time_left(C_max,sec,time_limit,time_expired_msg)) {
@@ -220,6 +222,7 @@ int pmcx_maxclique::search_dense(pmc_graph& G, vector<int>& sol) {
 
     #pragma omp parallel for schedule(dynamic) shared(pruned, G, adj, T, V, mc, C_max, induce_time) \
         firstprivate(colors,ind,vs,es) private(u, P, C)
+    // std::cout << "Number of threads running in parallel: " << omp_get_num_threads() << "\n";
     for (i = 0; i < (V.size()) - (mc-1); ++i) {
         if (not_reached_ub) {
             if (G.time_left(C_max,sec,time_limit,time_expired_msg)) {

@@ -62,6 +62,8 @@ int max_clique(long long nedges, int *ei, int *ej,
 
     if (in.threads <= 0) in.threads = 1;
 
+    // std::cout << "threads num: " << in.threads << "\n";
+
     pmc_graph G(nedges, ei, ej, offset); 
     
     //! ensure wait time is greater than the time to recompute the graph data structures
